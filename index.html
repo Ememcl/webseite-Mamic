@@ -13,20 +13,19 @@
             background-color: #f9f9f9;
         }
         header {
-            background-color: white;
+            background-color: #007BFF;
             color: white;
             padding: 20px;
             text-align: center;
             position: relative;
         }
         header img {
-            max-width: 250px;
+            max-width: 150px;
             margin-bottom: 15px;
         }
         header h1 {
             font-size: 2.5em;
             margin: 10px 0;
-            color: #333;
         }
         header p {
             font-size: 1.2em;
@@ -37,7 +36,7 @@
             display: block;
             width: 100%;
             height: 4px;
-            background-color: lightblue;
+            background-color: #FFD700;
             margin-top: 10px;
         }
         nav {
@@ -54,7 +53,7 @@
             transition: color 0.3s;
         }
         nav a:hover {
-            color: lightblue;
+            color: #FFD700;
         }
         section {
             padding: 40px 20px;
@@ -80,6 +79,7 @@
             text-align: center;
             background-color: #fff;
             transition: transform 0.3s;
+            position: relative;
         }
         .service:hover {
             transform: translateY(-5px);
@@ -87,6 +87,19 @@
         .service h3 {
             font-size: 1.5em;
             margin-bottom: 10px;
+        }
+        .details {
+            display: none;
+            text-align: left;
+            margin-top: 15px;
+        }
+        .service.active .details {
+            display: block;
+        }
+        .details img {
+            max-width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
         }
         footer {
             background-color: #333;
@@ -100,30 +113,21 @@
         footer p {
             margin: 0;
         }
-        #logo-banner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-            padding: 20px 0;
-            margin-top: 20px;
-        }
-        #logo-banner img {
-            max-height: 100px;
-            margin-right: 20px;
-        }
-        #logo-banner .details {
-            text-align: left;
-        }
-        #logo-banner .details p {
-            margin: 5px 0;
-            font-size: 1.1em;
-        }
         iframe {
             border: none;
             border-radius: 10px;
         }
     </style>
+    <script>
+        function toggleDetails(serviceId) {
+            const serviceElement = document.getElementById(serviceId);
+            const isActive = serviceElement.classList.contains('active');
+            document.querySelectorAll('.service').forEach(service => service.classList.remove('active'));
+            if (!isActive) {
+                serviceElement.classList.add('active');
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -138,29 +142,44 @@
         <a href="#standort">Standort</a>
     </nav>
 
-    <section id="logo-banner">
-        <img src="Logo.jpg" alt="Logo">
-        <div class="details">
-            <p><strong>Adresse:</strong> Am Häusel 122a, Pirmasens</p>
-            <p><strong>Telefon:</strong> 06331 144 319 | 0176 388 41 309</p>
-            <p><strong>Email:</strong> tomas.mamic@gmx.de</p>
-        </div>
-    </section>
-
     <section id="leistungen">
         <h2>Unsere Leistungen</h2>
         <div class="services">
-            <div class="service">
+            <div class="service" id="gas" onclick="toggleDetails('gas')">
                 <h3>Gasinstallationen</h3>
-                <p>Sichere und professionelle Installation von Gasleitungen und Geräten.</p>
+                <div class="details">
+                    <p>Wir bieten sichere und professionelle Installation von Gasleitungen und Geräten.</p>
+                    <ul>
+                        <li>Gasleitung überprüfen</li>
+                        <li>Neue Geräte anschließen</li>
+                        <li>Wartung und Reparatur</li>
+                    </ul>
+                    <img src="gas-installation.jpg" alt="Beispiel einer Gasinstallation">
+                </div>
             </div>
-            <div class="service">
+            <div class="service" id="wasser" onclick="toggleDetails('wasser')">
                 <h3>Wasserinstallationen</h3>
-                <p>Von Sanitäranlagen bis zur Rohrverlegung, wir bieten umfassende Lösungen.</p>
+                <div class="details">
+                    <p>Von Sanitäranlagen bis zur Rohrverlegung, wir bieten umfassende Lösungen.</p>
+                    <ul>
+                        <li>Sanitärinstallation</li>
+                        <li>Lecksuche und Reparatur</li>
+                        <li>Installation von Wasserfiltern</li>
+                    </ul>
+                    <img src="water-installation.jpg" alt="Beispiel einer Wasserinstallation">
+                </div>
             </div>
-            <div class="service">
+            <div class="service" id="heizung" onclick="toggleDetails('heizung')">
                 <h3>Heizungsbau</h3>
-                <p>Effiziente und moderne Heizsysteme für Ihr Zuhause.</p>
+                <div class="details">
+                    <p>Effiziente und moderne Heizsysteme für Ihr Zuhause.</p>
+                    <ul>
+                        <li>Installation von Heizkesseln</li>
+                        <li>Fußbodenheizung</li>
+                        <li>Wartung und Optimierung</li>
+                    </ul>
+                    <img src="heating-installation.jpg" alt="Beispiel einer Heizungsinstallation">
+                </div>
             </div>
         </div>
     </section>
